@@ -5,7 +5,7 @@ set -x
 pwd
 
 DIRECTORY="/netdata"
-RELATIVE_URL="monitor"
+#RELATIVE_URL="monitor"
 
 if [ "$(ls -A $DIRECTORY)" ]; then
     echo "$DIRECTORY is not Empty"
@@ -20,10 +20,10 @@ cd /netdata
 ./netdata-installer.sh --dont-wait
 
 
-if [ "$RELATIVE_URL" != "" ]
-then
-    cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
-    #sed -i.bak s/'=\"dashboard.js'/'=\"$RELATIVE_URL\/dashboard.js'/g /usr/share/netdata/web/index.html
-    sed -i.bak "s/=\"dashboard.js/=\"$RELATIVE_URL\/dashboard.js/g" /usr/share/netdata/web/index.html
-    cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
-fi
+#if [ "$RELATIVE_URL" != "" ]
+#then
+#    cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
+#    #sed -i.bak s/'=\"dashboard.js'/'=\"$RELATIVE_URL\/dashboard.js'/g /usr/share/netdata/web/index.html
+#    sed -i.bak "s/=\"dashboard.js/=\"$RELATIVE_URL\/dashboard.js/g" /usr/share/netdata/web/index.html
+#    cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
+#fi
