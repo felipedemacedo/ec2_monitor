@@ -1,85 +1,35 @@
-# ec2_monitor
+# AWS EC2 Instance Monitor in a Docker Container
 
-# Descrição
+<img src="https://cloud.githubusercontent.com/assets/2662304/19168687/f6a567be-8c19-11e6-8561-ce8d589e8346.gif"/>
 
-Ubuntu 16.04 com o monitor de instâncias instalado. 
+# Description
+
+Ubuntu 16.04 container hosting a website for monitoring many performance details in real time.
+
+Powered by Netdata https://github.com/firehol/netdata
+
+**netdata** is a system for **distributed real-time performance and health monitoring**.
+It provides **unparalleled insights, in real-time**, of everything happening on the
+system it runs (including applications such as web and database servers), using
+**modern interactive web dashboards**.
+
+_netdata is **fast** and **efficient**, designed to permanently run on all systems
+(**physical** & **virtual** servers, **containers**, **IoT** devices), without
+disrupting their core function._
 
 https://hub.docker.com/r/felipederodrigues/ec2_monitor/
 
-# Como foi criada essa img ?
-## [Dockerfile]
+
+# How to use it ?
+
+Run this command in a terminal:
 ```console
-FROM ubuntu:16.04
-
-RUN buildDeps=' \
-		zlib1g-dev \
-		gcc \
-		make \
-		git \
-		autoconf \
-		autogen \
-		automake \
-		pkg-config \
-		uuid-dev \
-		curl \
-	' \
-	&& set -ex \
-	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends 
-
-ADD compile.sh ./
-RUN chmod +x compile.sh
-
-EXPOSE 19999
-
-CMD ["sh", "-c", "./compile.sh ; /bin/bash"]
+docker run -ti --rm -p 19999:19999 --name monitor --detach felipederodrigues/ec2_monitor:v1 && docker logs -f monitor
 ```
-## [compile.sh]
-```console
-#!/bin/sh
+And wait for the following screen:
 
-set -x
+![image](https://cloud.githubusercontent.com/assets/7635127/26420352/b5ed8f9c-4098-11e7-83d0-edda9489cac0.png)
 
-pwd
+Simple as that.
 
-DIRECTORY="/netdata"
-RELATIVE_URL="monitor"
-
-if [ "$(ls -A $DIRECTORY)" ]; then
-    echo "$DIRECTORY is not Empty"
-else
-    echo "$DIRECTORY is Empty"
-    # http://stackoverflow.com/questions/23885449/unable-to-resolve-unable-to-get-local-issuer-certificate-using-git-on-windows
-    git config --global http.sslVerify false
-    git clone https://github.com/firehol/netdata
-fi
-
-cd /netdata
-./netdata-installer.sh --dont-wait
-
-
-if [ "$RELATIVE_URL" != "" ]
-then
-	cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
-	#sed -i.bak s/'=\"dashboard.js'/'=\"$RELATIVE_URL\/dashboard.js'/g /usr/share/netdata/web/index.html
-	sed -i.bak "s/=\"dashboard.js/=\"$RELATIVE_URL\/dashboard.js/g" /usr/share/netdata/web/index.html
-	cat /usr/share/netdata/web/index.html | grep -e "dashboard.js"
-fi
-```
-
-
-# Como utilizar ?
-
-mkdir -p /home/ubuntu/monitor/netdata
-
-```console
-docker run -ti \
--v /home/ubuntu/monitor/netdata:/netdata \
--p 4000:19999 \
---name monitor \
---restart always \
---detach \
-felipederodrigues/ec2_monitor:v1
-```
-
-
-Acessar o IP_DO_SERVIDOR:4000 OU IP_DO_SERVIDOR/monitor
+Now access from any browser: SERVER_IP_ADDRESS:19999
