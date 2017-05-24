@@ -1,24 +1,23 @@
 # AWS EC2 Instance Monitor in a Docker Container
 
+[View it on Docker Hub](https://hub.docker.com/r/felipederodrigues/ec2_monitor)
+
 ![f6a567be-8c19-11e6-8561-ce8d589e8346](https://cloud.githubusercontent.com/assets/7635127/26420919/8a18cc4a-409a-11e7-9bc9-c617e55a0f2b.gif)
 
 # Description
 
 Ubuntu 16.04 container hosting a website for monitoring many performance details in real time.
 
-Powered by Netdata https://github.com/firehol/netdata
+Powered by Netdata: https://github.com/firehol/netdata
 
-**netdata** is a system for **distributed real-time performance and health monitoring**.
+> " **netdata** is a system for **distributed real-time performance and health monitoring**.
 It provides **unparalleled insights, in real-time**, of everything happening on the
 system it runs (including applications such as web and database servers), using
-**modern interactive web dashboards**.
+**modern interactive web dashboards**. "
 
-_netdata is **fast** and **efficient**, designed to permanently run on all systems
+> " _netdata is **fast** and **efficient**, designed to permanently run on all systems
 (**physical** & **virtual** servers, **containers**, **IoT** devices), without
-disrupting their core function._
-
-https://hub.docker.com/r/felipederodrigues/ec2_monitor/
-
+disrupting their core function._ "
 
 # How to use it ?
 
