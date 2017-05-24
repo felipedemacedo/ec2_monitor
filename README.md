@@ -1,6 +1,6 @@
 # AWS EC2 Instance Monitor in a Docker Container
 
-<img src="https://cloud.githubusercontent.com/assets/2662304/19168687/f6a567be-8c19-11e6-8561-ce8d589e8346.gif"/>
+![f6a567be-8c19-11e6-8561-ce8d589e8346](https://cloud.githubusercontent.com/assets/7635127/26420919/8a18cc4a-409a-11e7-9bc9-c617e55a0f2b.gif)
 
 # Description
 
